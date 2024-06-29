@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Ghost</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nosifer&display=swap');
+
+        body {
+            background-color: red;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        #auth, #leaderboard {
+            position: absolute;
+            display: flex;
+            gap: 10px;
+        }
+        #auth {
+            top: 10px;
+            right: 10px;
+        }
+        #leaderboard {
+            top: 10px;
+            left: 10px;
+        }
+        .auth-box, .leaderboard-box {
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .auth-box a, .leaderboard-box a {
+            color: white;
+            text-decoration: none;
+        }
+        .auth-box:hover, .leaderboard-box:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        #title {
+            font-family: 'Nosifer', cursive;
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        #scoreboard {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #clickButton {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        #clickButton img {
+            width: 150px;
+            height: auto;
+            transition: transform 0.1s;
+        }
+        #clickButton img:active {
+            transform: scale(0.9);
+        }
+        #subtitle {
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+        /* Social Media Icons */
+        #social {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            z-index: 1000;
+        }
+        .popup p {
+            margin: 0;
+            font-size: 1.5em;
+            color: black;
+        }
+        .popup .close-btn {
+            margin-top: 20px;
+            padding: 5px 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div id="auth">
+        <div class="auth-box" onclick="showPopup()">Login</div>
+        <div class="auth-box" onclick="showPopup()">sign up</div>
+    </div>
+    <div id="leaderboard">
+        <div class="leaderboard-box" onclick="showPopup()">Leaderboard</div>
+    </div>
+    <div id="container">
+        <div id="title">$GHOST</div>
+        <div id="scoreboard">Poin: 0</div>
+        <button id="clickButton">
+            <img src="gambar1.png" alt="Klik Saya!" id="buttonImage">
+        </button>
+        <div id="subtitle">This is only a test version of the game phase 1</div>
+    </div>
+    <!-- Social Media Icons -->
+    <div id="social">
+        <a href="https://x.com/GhostGamesup" target="_blank">
+            <img src="twitter.png" alt="Twitter" class="social-icon">
+        </a>
+        <a href="https://t.me/+ZQaiel1o_u00ZWI1" target="_blank">
+            <img src="telegram.png" alt="Telegram" class="social-icon">
+        </a>
+    </div>
+    <!-- Popup -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <p>COMING SOON</p>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        let score = 0;
+        const scoreboard = document.getElementById('scoreboard');
+        const clickButton = document.getElementById('clickButton');
+        const buttonImage = document.getElementById('buttonImage');
+        const images = ["gambar1.png", "gambar2.png"];
+        let currentImageIndex = 0;
+
+        clickButton.addEventListener('click', () => {
+            score++;
+            scoreboard.textContent = `Poin: ${score}`;
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            buttonImage.src = images[currentImageIndex];
+        });
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
